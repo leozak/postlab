@@ -1,0 +1,85 @@
+import { useEffect, useState } from "react";
+import type { SubmitEvent } from "react";
+import axios from "axios";
+
+import { useContentStore } from "../../data/context";
+
+const API_URL = "http://127.0.0.1:8000";
+
+const InputURL = () => {
+  const [url, setUrl] = useState(
+    "https://akitaonrails.com/2026/02/20/do-zero-a-pos-producao-em-1-semana-como-usar-ia-em-projetos-de-verdade-bastidores-do-the-m-akita-chronicles/",
+  );
+  const [isDisableb, setIsDisabled] = useState(false);
+
+  const { title, setContent, reset } = useContentStore();
+
+  const handleSubmit = async (e: SubmitEvent) => {
+    setIsDisabled(true);
+    e.preventDefault();
+    console.log(url);
+    try {
+      const response = await axios.post(API_URL + "/summarize", { url });
+      setContent(response.data.title, response.data.text);
+    } catch (error) {
+      console.error(error);
+    }
+    setIsDisabled(false);
+  };
+
+  const handleReset = () => {
+    reset();
+    setIsDisabled(false);
+  };
+
+  useEffect(() => {
+    if (title !== "") {
+      setIsDisabled(true);
+    }
+  }, [title]);
+
+  return (
+    <div className="flex flex-row justify-center items-center">
+      <form
+        onSubmit={handleSubmit}
+        method="post"
+        className="w-full flex flex-row justify-center"
+      >
+        <div className="border rounded-2xl p-2 px-4 bg-neutral-900 w-2/3">
+          <input
+            id="url"
+            name="url"
+            type="url"
+            value={url}
+            placeholder="Informe a URL do texto"
+            onChange={(e) => setUrl(e.target.value)}
+            disabled={isDisableb}
+            className="w-full focus:outline-none focus:ring-0"
+            required
+            autoComplete="off"
+            autoCorrect="off"
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={isDisableb}
+          className="ml-4 rounded-2xl bg-amber-700 p-2 px-4 font-bold text-white hover:bg-amber-600 active:bg-amber-700 hover:cursor-pointer disabled:bg-neutral-600 disabled:text-neutral-400 disabled:cursor-default"
+        >
+          Enviar
+        </button>
+        {title && (
+          <button
+            type="button"
+            onClick={handleReset}
+            className="ml-4 rounded-2xl bg-amber-700 p-2 px-4 font-bold text-white hover:bg-amber-600 active:bg-amber-700 hover:cursor-pointer disabled:bg-neutral-600 disabled:text-neutral-400 disabled:cursor-default"
+          >
+            Limpar
+          </button>
+        )}
+      </form>
+    </div>
+  );
+};
+
+export default InputURL;

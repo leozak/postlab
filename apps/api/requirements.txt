@@ -1,0 +1,12 @@
+dotenv
+langchain
+langchain-core
+langgraph
+langsmith
+langchain-nvidia-ai-endpoints
+langgraph-cli[inmem]
+fastapi
+uvicorn
+beautifulsoup4
+rich
+markdownify

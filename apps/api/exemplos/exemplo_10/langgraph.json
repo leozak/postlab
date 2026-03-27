@@ -1,0 +1,9 @@
+{
+  "$schema": "https://langgra.ph/schema.json",
+  "graphs": {
+    "grafo": "exemplos/exemplo_10/graph.py:build_graph"
+  },
+  "env": ".env",
+  "python_version": "3.14",
+  "dependencies": ["."]
+}
