@@ -3,10 +3,13 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from webscraping import web_scraping
 
+from rich import print
+
+from webscraping import web_scraping
 from summaryze import summaryze
 from state import State
+from questions import questions
 
 load_dotenv()
 
@@ -63,13 +66,24 @@ async def summarize_request(request: SummarizeRequest):
     state.text = text.text
     state.summary = summaryzed_text
 
-    print("> summarize end")
-    print(summaryzed_text)
-
     return {
         "title": text.title,
         "text": summaryzed_text
     }
-    
 
-    return
+@app.get("/questions")
+async def questions_request():
+    """
+    Criate questions and answers
+    """
+    print("> questions endpoint")
+    
+    questions_result = questions(state.text)
+
+    print(questions_result)
+
+    return {
+        "id": 1,
+        "questions": "questions",
+        "aswers": "aswers"
+    }

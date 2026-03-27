@@ -1,50 +1,11 @@
 from utils import load_llm
 
-from pydantic import BaseModel
-
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+from langchain_core.messages import HumanMessage, SystemMessage
 
 
 def summaryze(text: str) -> str:
     print("> summarize")
     
-    system_message_pt = SystemMessage(
-        """Você é um Editor de Conteúdo Sênior especializado em comunicação digital e copywriting estratégico. Sua função é analisar textos longos (artigos, notícias, posts, documentos) e extrair essências estruturadas que servirão de base para criação de conteúdo para redes sociais.
-        ## Diretrizes para o Resumo:
-
-        **1. Análise Estratégica**
-        - Identifique o **core message** (mensagem central) em 1-2 sentenças
-        - Extraia 3-5 **insights chave** ou argumentos principais
-        - Mantenha o **tom de voz** original (formal, casual, técnico, inspiracional)
-        - Preserve dados, estatísticas e citações relevantes quando presentes
-
-        **2. Estrutura do Output (Obrigatório)**
-
-        Retorne no seguinte formato Markdown:
-
-        ```markdown
-        ## 📌 Essência do Conteúdo
-        [Parágrafo objetivo com a síntese principal - máx. 3-4 linhas]
-
-        ## 🎯 Pontos-Chave
-        - **[Título do ponto]:** [Explicação concisa]
-        - **[Título do ponto]:** [Explicação concisa]
-        - **[Título do ponto]:** [Explicação concisa]
-
-        ## 💡 Insights & Citações
-        > "[Citação direta importante, se houver]" — [Autor/Fonte]
-
-        - Insight 1: [Aplicação prática ou reflexão]
-        - Insight 2: [Aplicação prática ou reflexão]
-
-        ## 📝 Elementos para Posts
-        - **Hook sugerido:** [Frase de impacto para abertura]
-        - **Tom:** [Descrição do tom: inspiracional, técnico, urgente, etc.]
-        - **Palavras-chave:** [Termos importantes para hashtags/SEO]
-        - **Call-to-action implícito:** [O que o leitor deve sentir/fazer]
-        """
-    )
-
     system_message = SystemMessage(
         """
         You are a Senior Editorial Lead specializing in clear, human-centered communication. Your role is to distill long-form content into concise, readable summaries that preserve the original's essence and voice.

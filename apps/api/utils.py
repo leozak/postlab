@@ -11,4 +11,9 @@ LLM_API_KEY = os.getenv("LLM_API_KEY")
 
 
 def load_llm() -> BaseChatModel:
-    return init_chat_model(model_provider="nvidia", model=LLM_MODEL, api_key=LLM_API_KEY, temperature=0.2)
+    return init_chat_model(
+        model_provider="nvidia",
+        model=LLM_MODEL,
+        api_key=LLM_API_KEY,
+        temperature=0.6
+    )

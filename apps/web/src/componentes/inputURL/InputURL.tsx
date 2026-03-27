@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import type { SubmitEvent } from "react";
 import axios from "axios";
 
-import { useContentStore } from "../../data/context";
-
-const API_URL = "http://127.0.0.1:8000";
+import { useContentStore } from "../../store/context";
+import { API_URL } from "../../config";
 
 const InputURL = () => {
   const [url, setUrl] = useState(
@@ -45,7 +44,7 @@ const InputURL = () => {
         method="post"
         className="w-full flex flex-row justify-center"
       >
-        <div className="border rounded-2xl p-2 px-4 bg-neutral-900 w-2/3">
+        <div className="border rounded-2xl p-2 px-4 bg-amber-900/10 w-2/3">
           <input
             id="url"
             name="url"
