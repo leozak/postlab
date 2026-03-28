@@ -18,7 +18,6 @@ const InputURL = () => {
   const handleSubmit = async (e: SubmitEvent) => {
     setIsLoading(true);
     e.preventDefault();
-    console.log(url);
     try {
       const response = await axios.post(API_URL + "/summarize", { url });
       setContent(response.data.title, response.data.text);

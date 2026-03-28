@@ -55,7 +55,8 @@ async def summarize_request(request: SummarizeRequest):
     """
     Summarize text
     """
-    print("> summarize")
+    print("---")
+    print("[bold blue]> summarize request")
 
     text = await web_scraping(request.url)
 
@@ -71,19 +72,16 @@ async def summarize_request(request: SummarizeRequest):
         "text": summaryzed_text
     }
 
-@app.get("/questions")
+@app.post("/questions")
 async def questions_request():
     """
     Criate questions and answers
     """
-    print("> questions endpoint")
+    print("---")
+    print("[bold cyan]> questions endpoint")
     
     questions_result = questions(state.text)
 
     print(questions_result)
 
-    return {
-        "id": 1,
-        "questions": "questions",
-        "aswers": "aswers"
-    }
+    return questions_result

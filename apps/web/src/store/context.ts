@@ -22,11 +22,12 @@ import { create } from "zustand";
   */
 
 interface Question {
-  id: string;
+  id: number;
   text: string;
 }
 
 interface Aswers {
+  questionId: number;
   id: string;
   text: string[];
 }
