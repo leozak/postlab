@@ -2,21 +2,14 @@ import { useContentStore } from "../../store/context";
 
 import type { Aswers, Question } from "../../interfaces/interfaces";
 
-import { useQuestions } from "../../hooks/useAgent";
+import { useQuestions } from "../../hooks/useQuestions";
 import Loading from "../loading/Loading";
-import { useEffect } from "react";
-
-interface QuestionItem {
-  id: number;
-  question: Question;
-  aswers: Aswers[];
-}
 
 const Questions = () => {
   const { questions } = useContentStore();
   const { aswers } = useContentStore();
 
-  const { isLoading } = useQuestions(); //agent = useQuestions();
+  const { isLoading } = useQuestions();
 
   return (
     <>

@@ -32,6 +32,15 @@ interface Aswers {
   text: string[];
 }
 
+interface Response {
+  response: string;
+}
+
+interface Post {
+  text: string;
+  tags: string[];
+}
+
 // Definindo a interface do estado
 interface ContentState {
   title: string;
@@ -39,6 +48,8 @@ interface ContentState {
   ideology: string;
   questions: Question[];
   aswers: Aswers[];
+  responses: Response[];
+  posts: Post[];
   // Actions
   setTitle: (title: string) => void;
   setText: (text: string) => void;
@@ -46,6 +57,9 @@ interface ContentState {
   setContent: (title: string, text: string, ideology?: string) => void;
   setQuestions: (questions: Question[]) => void;
   setAswers: (questions: Aswers[]) => void;
+  setResponses: (responses: Response[]) => void;
+  addResponse: (response: Response) => void;
+  addPost: (post: Post) => void;
   reset: () => void;
 }
 
@@ -57,6 +71,8 @@ export const useContentStore = create<ContentState>((set) => ({
   ideology: "",
   questions: [],
   aswers: [],
+  responses: [],
+  posts: [],
 
   // Actions
   setTitle: (title) => set({ title }),
@@ -71,8 +87,23 @@ export const useContentStore = create<ContentState>((set) => ({
 
   setAswers: (aswers) => set({ aswers }),
 
+  setResponses: (responses) => set({ responses }),
+
+  addResponse: (response) =>
+    set((state) => ({ responses: [...state.responses, response] })),
+
+  addPost: (post) => set((state) => ({ posts: [...state.posts, post] })),
+
   reset: () =>
-    set({ title: "", text: "", ideology: "", questions: [], aswers: [] }),
+    set({
+      title: "",
+      text: "",
+      ideology: "",
+      questions: [],
+      aswers: [],
+      responses: [],
+      posts: [],
+    }),
 }));
 
 // store/selectors.ts
@@ -86,3 +117,5 @@ export const selectContent = (state: ContentState) => ({
 });
 export const selectQuestions = (state: ContentState) => state.questions;
 export const selectAswers = (state: ContentState) => state.aswers;
+export const selectResponses = (state: ContentState) => state.responses;
+export const selectPosts = (state: ContentState) => state.posts;
