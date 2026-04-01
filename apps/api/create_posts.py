@@ -29,6 +29,7 @@ def get_posts(text: str, ideology: str, answers: list) -> str:
         - Varie o formato: alguns podem ser mais diretos (frases de efeito), outros podem ser perguntas retóricas, citações, ou pequenos argumentos.
         - Sempre que possível, utilize elementos das perguntas e respostas para enriquecer os posts.
         - Os posts devem ser relevantes, engajadores e adequados ao contexto da rede social X.
+        - Não deve ter tags duplas ou irrelevantes, nem conter tags dentro do texto do post.
 
         Além dos posts, você deve gerar **tags (hashtags) relevantes** para cada post, que podem variar ou se repetir conforme a necessidade.
 

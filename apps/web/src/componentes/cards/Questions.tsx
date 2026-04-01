@@ -14,6 +14,7 @@ const Questions = () => {
   const { questions } = useContentStore();
   const { aswers } = useContentStore();
   const { ideology } = useContentStore();
+  const { posts } = useContentStore();
   const { addPost } = useContentStore();
 
   const { isLoading } = useQuestions();
@@ -26,7 +27,10 @@ const Questions = () => {
   };
 
   const handleCreatePosts = () => {
-    setPostsIsLoading(true);
+    if (posts.length > 0) return;
+
+    setPostsIsLoading(() => true);
+
     const answers_temp = questions
       .filter((q: Question) => responses[q.id] !== undefined)
       .map((q: Question) => ({
@@ -53,7 +57,7 @@ const Questions = () => {
     };
 
     fetchPosts();
-    setPostsIsLoading(false);
+    setPostsIsLoading(() => false);
   };
 
   return (
