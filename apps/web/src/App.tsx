@@ -5,10 +5,10 @@ import TextSummarized from "./componentes/cards/TextSummarized";
 import { useContentStore } from "./store/context";
 import Questions from "./componentes/cards/Questions";
 import IdeologicalThermometer from "./componentes/cards/IdeologicalThermometer";
-import { useState } from "react";
+import Posts from "./componentes/cards/Posts";
 
 function App() {
-  const { title, text } = useContentStore();
+  const { title, text, posts } = useContentStore();
   return (
     <div className="flex justify-center">
       <div className="w-full max-w-200 p-6 pt-8">
@@ -19,6 +19,7 @@ function App() {
         {title !== "" && <TextSummarized />}
         {text !== "" && <IdeologicalThermometer />}
         {text !== "" && <Questions />}
+        {posts.length > 0 && <Posts />}
       </div>
     </div>
   );

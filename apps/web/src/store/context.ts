@@ -68,7 +68,7 @@ export const useContentStore = create<ContentState>((set) => ({
   // Estado inicial
   title: "",
   text: "",
-  ideology: "",
+  ideology: "Centro",
   questions: [],
   aswers: [],
   responses: [],
@@ -98,7 +98,7 @@ export const useContentStore = create<ContentState>((set) => ({
     set({
       title: "",
       text: "",
-      ideology: "",
+      ideology: "Centro",
       questions: [],
       aswers: [],
       responses: [],

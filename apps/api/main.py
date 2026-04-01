@@ -5,11 +5,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from rich import print
+from rich.markup import escape
 
 from webscraping import web_scraping
 from summaryze import summaryze
 from state import State
 from questions import questions
+from create_posts import get_posts
 
 load_dotenv()
 
@@ -82,6 +84,29 @@ async def questions_request():
     
     questions_result = questions(state.text)
 
-    print(questions_result)
+    # print(questions_result)
 
     return questions_result
+
+
+#
+## Posts
+class Answer(BaseModel):
+    question: str
+    answer: str
+
+class PostsRequest(BaseModel):
+    ideology: str
+    answers: list[Answer]
+
+@app.post("/create-posts")
+async def create_posts(request: PostsRequest):
+    """
+    Create posts
+    """
+    print("---")
+    print("[bold blue]> create posts request")
+
+    posts_request = get_posts(escape(state.text), request.ideology, request.answers)
+
+    return posts_request
